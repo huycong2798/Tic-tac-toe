@@ -1,26 +1,24 @@
-import React from 'react'
+import React from "react";
+
 function Square(props) {
-    let corlorValue = 'square btn-hover'
-    if(props.isEnd)
-    {
-        corlorValue = 'square'
-    }
-    if (props.value === 'X')
-    {
-      corlorValue = 'square isXNext'
-    }
-    if (props.value === 'O')
-    {
-      corlorValue = 'square isONext'
-    }
-    if (props.isWin)
-    {
-        corlorValue += ' highlight'
-    }
-    return (
-      <button className={corlorValue} onClick={props.onClick}>
-        {props.value}
-      </button>
-    );
+  let corlorValue = "square btn-hover";
+  const property = props;
+  if (property.isEnd) {
+    corlorValue = "square";
+  }
+  if (property.value === "X") {
+    corlorValue = "square isXNext";
+  }
+  if (property.value === "O") {
+    corlorValue = "square isONext";
+  }
+  if (property.isWin) {
+    corlorValue += " highlight";
+  }
+  return (
+    <button type="button" className={corlorValue} onClick={property.onClick}>
+      {property.value}
+    </button>
+  );
 }
 export default Square;
