@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "ltw-caro-ver2"
+    "ltw-caro-refactor": "ltw-caro-eslint",
+    "default": "ltw-caro-eslint"
   }
 }
