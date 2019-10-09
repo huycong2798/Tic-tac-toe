@@ -1,0 +1,5 @@
+const HANDLE_CLICK = "HANDLE_CLICK";
+const PLAY_AGAIN = "PLAY_AGAIN";
+const JUMP_TO = "JUMP_TO";
+const SORT = "SORT";
+export {HANDLE_CLICK, PLAY_AGAIN, JUMP_TO, SORT};

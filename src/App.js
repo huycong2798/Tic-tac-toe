@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import "./index.css";
-import Game from "./component/Game";
+import Game from "./containers/Game";
 
 class App extends React.PureComponent {
   render() {

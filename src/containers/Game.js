@@ -1,6 +1,6 @@
 import React from "react";
 import "./Game.css";
-import Board from "./Board";
+import Board from "../component/Board";
 
 const nRow = 20;
 
