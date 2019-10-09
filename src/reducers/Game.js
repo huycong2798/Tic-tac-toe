@@ -50,6 +50,7 @@ const initialState = {
   stepNumber: 0,
   xIsNext: true,
   isAscending: true,
+  winner: null,
 };
 const gameReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -57,19 +58,26 @@ const gameReducer = (state = initialState, action) => {
       const {history} = state;
       const {stepNumber} = state;
       const {xIsNext} = state;
-
+      const {winner} = state;
       const {i} = action;
       const histories = history.slice(0, stepNumber + 1);
-      const current = history[history.length - 1];
+      const current = histories[histories.length - 1];
       const squares = current.squares.slice();
 
-      if (calculateWinner(squares) || squares[i]) {
+      if (winner || squares[i]) {
         return state;
       }
       squares[i] = xIsNext ? "X" : "O";
+      const isWin = calculateWinner(squares);
+      if(isWin) {
+          return {
+              ...state,
+              winner: isWin
+          }
+      }
       const newState = {
         ...state,
-        histor: histories.concat([
+        history: histories.concat([
           {
             squares,
             position: {x: Math.floor(i / nRow), y: i % nRow},
@@ -77,6 +85,7 @@ const gameReducer = (state = initialState, action) => {
         ]),
         stepNumber: histories.length,
         xIsNext: !xIsNext,
+        winner
       };
       return newState;
     }
@@ -89,13 +98,19 @@ const gameReducer = (state = initialState, action) => {
     }
 
     case types.PLAY_AGAIN:
-      return state;
+      return initialState;
     case types.JUMP_TO: {
       const {step} = action;
+     // let {winner} = state;
+    //   if(winner)
+    //   {
+    //       winner = !winner;
+    //   }
       return {
         ...state,
         stepNumber: step,
         xIsNext: step % 2 === 0,
+       // winner
       };
     }
 

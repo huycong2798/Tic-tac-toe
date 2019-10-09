@@ -5,7 +5,7 @@ const handleClick = i => ({
   i,
 });
 const playAgain = () => ({
-  type: types.playAgain,
+  type: types.PLAY_AGAIN,
 });
 const jumpTo = step => ({
   type: types.JUMP_TO,
