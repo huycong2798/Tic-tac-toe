@@ -68,13 +68,7 @@ const gameReducer = (state = initialState, action) => {
         return state;
       }
       squares[i] = xIsNext ? "X" : "O";
-      const isWin = calculateWinner(squares);
-      if(isWin) {
-          return {
-              ...state,
-              winner: isWin
-          }
-      }
+
       const newState = {
         ...state,
         history: histories.concat([
@@ -85,8 +79,15 @@ const gameReducer = (state = initialState, action) => {
         ]),
         stepNumber: histories.length,
         xIsNext: !xIsNext,
-        winner
+        winner,
       };
+      const isWin = calculateWinner(squares);
+      if (isWin) {
+        return {
+          ...newState,
+          winner: isWin,
+        };
+      }
       return newState;
     }
     case types.SORT: {
@@ -101,16 +102,15 @@ const gameReducer = (state = initialState, action) => {
       return initialState;
     case types.JUMP_TO: {
       const {step} = action;
-     // let {winner} = state;
-    //   if(winner)
-    //   {
-    //       winner = !winner;
-    //   }
+      let {winner} = state;
+      if (winner) {
+        winner = !winner;
+      }
       return {
         ...state,
         stepNumber: step,
         xIsNext: step % 2 === 0,
-       // winner
+        winner,
       };
     }
 
