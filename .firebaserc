@@ -1,6 +1,5 @@
 {
   "projects": {
-    "ltw-caro-refactor": "ltw-caro-eslint",
-    "default": "ltw-caro-eslint"
+    "default": "caro-react-redux"
   }
 }
