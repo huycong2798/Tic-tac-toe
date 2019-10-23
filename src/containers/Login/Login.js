@@ -1,26 +1,15 @@
-// import {connect} from "react-redux";
-// import * as actions from "../../actions/Account";
-// //import "./Login.css";
-// import Login from "../../component/Login/index";
+import {connect} from "react-redux";
+import {userActions} from "../../actions/Account";
+import LoginComponent from "../../component/Login/Login";
 
-// const mapStateToProps = state => ({
-//   Game: state.Game,
-// });
-// const mapDispatchToProps = dispatch => ({
-//   handleClick: i => {
-//     dispatch(actions.handleClick(i));
-//   },
-//   playAgain: () => {
-//     dispatch(actions.playAgain());
-//   },
-//   jumpTo: move => {
-//     dispatch(actions.jumpTo(move));
-//   },
-//   sort: () => {
-//     dispatch(actions.sort());
-//   },
-// });
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Game);
+const mapStateToProps = state => ({
+  LoginComponent: state.loginReducer,
+});
+const mapDispatchToProps = {
+  login: userActions.login,
+  logout: userActions.logout,
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginComponent);

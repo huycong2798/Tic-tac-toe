@@ -1,14 +1,14 @@
-/* eslint-disable no-restricted-globals */
 import React from "react";
 
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import Game from "./containers/Caro/Game";
 import RegisterComponent from "./containers/Register/register";
-import NormalLoginForm from "./component/Login";
+import LoginComponent from "./containers/Login/Login";
 import NavBarComponent from "./component/navBar/navBar";
 import AlertComponent from "./containers/Alert/alert";
 import "./containers/navBar/navBar.css";
+import history from "./helper/history";
 
 class App extends React.PureComponent {
   render() {
@@ -22,7 +22,7 @@ class App extends React.PureComponent {
               <Game />
             </Route>
             <Route path="/register" component={RegisterComponent} />
-            <Route path="/login" component={NormalLoginForm} />
+            <Route path="/login" component={LoginComponent} />
           </Switch>
         </div>
       </Router>

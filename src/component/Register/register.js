@@ -3,7 +3,7 @@ import React from "react";
 import "antd/dist/antd.css";
 import "../../containers/Register/Register.css";
 import {Form, Input, Tooltip, Icon, Select, Checkbox, Button} from "antd";
-import loading from "../../containers/Register/loading.gif";
+import loading from "../../gif/loading.gif";
 
 const {Option} = Select;
 
@@ -47,7 +47,6 @@ class RegistrationForm extends React.Component {
 
   render() {
     const prop = this.props;
-    console.log("alert---", prop);
     const {registering} = prop.registerComponent;
 
     const {getFieldDecorator} = this.props.form;

@@ -12,8 +12,7 @@ function handleResponse(response) {
         location.reload(true);
       }
       console.log("data----not ok", data);
-      const error = (data && data.message) || response.statusText;
-      return Promise.reject(error);
+      return Promise.reject(data.returnmessage);
     }
 
     return data;
@@ -30,24 +29,46 @@ const register = async user => {
     `https://server-api-caro.herokuapp.com/user/register`,
     requestOptions
   ).then(handleResponse);
-  //   const res = await axios.post(url,);
-  //   if(res.status === 200)
-  //   {
-  //       console.log("successfully register");
-  //   }
-  //   axios
-  //     .post(url, {
-  //       email: "queoloan@gmail.com",
-  //       password: "12345",
-  //     })
-  //     .then(response => {
-  //       console.log(response);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
 };
+const login = (email, password) => {
+  const requestOptions = {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({email, password}),
+  };
+
+  return fetch(`https://server-api-caro.herokuapp.com/user/login`, requestOptions)
+    .then(handleResponse)
+    .then(user => {
+      console.log(JSON.stringify(user));
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem("user", JSON.stringify(user));
+
+      return user;
+    });
+};
+const authHeader = () => {
+  // return authorization header with jwt token
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user && user.token) {
+    return {Authorization: `Bearer ${user.token}`};
+  }
+  return {};
+};
+function getAll() {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
+
+  return fetch(`https://server-api-caro.herokuapp.com/me`, requestOptions).then(
+    handleResponse
+  );
+}
 const userService = {
   register,
+  login,
+  getAll,
 };
 export default userService;

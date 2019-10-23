@@ -1,10 +1,8 @@
-import {createBrowserHistory} from "history";
+import history from "../../helper/history";
 
 import {userConstants} from "../../constants/Account";
 import alertActions from "./alert";
 import userService from "../../services";
-
-const history = createBrowserHistory();
 
 const register = user => {
   const request = () => {
@@ -22,7 +20,8 @@ const register = user => {
       () => {
         dispatch(success());
         history.push("/login");
-        console.log(user);
+        // eslint-disable-next-line no-restricted-globals
+        location.reload(true);
         dispatch(alertActions.success("Registration successful"));
       },
       error => {
@@ -33,7 +32,35 @@ const register = user => {
     );
   };
 };
+const login = (email, password) => {
+  const request = user => {
+    return {type: userConstants.LOGIN_REQUEST, user};
+  };
+  const success = user => {
+    return {type: userConstants.LOGIN_SUCCESS, user};
+  };
+  const failure = error => {
+    return {type: userConstants.LOGIN_FAILURE, error};
+  };
+  return dispatch => {
+    dispatch(request({email}));
+
+    userService.login(email, password).then(
+      user => {
+        dispatch(success(user));
+        history.push("/");
+        // eslint-disable-next-line no-restricted-globals
+        location.reload(true);
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+};
 const userActions = {
   register,
+  login,
 };
 export default userActions;
