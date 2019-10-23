@@ -1,38 +1,28 @@
+/* eslint-disable no-restricted-globals */
 import React from "react";
-import {createStore} from "redux";
-import {Provider} from "react-redux";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import allReducers from "./reducers";
-import Game from "./containers/Caro/Game";
-import Register from "./component/Register";
-import Login from "./component/Login";
-import Nav from "./component/Home/Nav";
 
-const store = createStore(
-  allReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+
+import Game from "./containers/Caro/Game";
+import RegisterComponent from "./containers/Register/register";
+import NormalLoginForm from "./component/Login";
+import NavBarComponent from "./component/navBar/navBar";
+import AlertComponent from "./containers/Alert/alert";
+import "./containers/navBar/navBar.css";
+
 class App extends React.PureComponent {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div>
-          <Nav />
+          <NavBarComponent />
+          <AlertComponent />
           <Switch>
-            <Route path="/" exact>
-               
-              <Provider store={store}>
-                <Game />
-              </Provider> 
+            <Route exact path="/" component={Game}>
+              <Game />
             </Route>
-            <Route path="/register">
-               
-              <Register /> 
-            </Route>
-            <Route path="/login">
-               
-              <Login /> 
-            </Route>
+            <Route path="/register" component={RegisterComponent} />
+            <Route path="/login" component={NormalLoginForm} />
           </Switch>
         </div>
       </Router>

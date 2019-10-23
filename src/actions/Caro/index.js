@@ -1,4 +1,4 @@
-import * as types from "../constants";
+import * as types from "../../constants/Caro";
 
 const handleClick = i => ({
   type: types.HANDLE_CLICK,

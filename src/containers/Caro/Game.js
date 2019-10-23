@@ -1,10 +1,10 @@
 import {connect} from "react-redux";
-import * as actions from "../../actions";
+import * as actions from "../../actions/Caro";
 import "./Game.css";
 import Game from "../../component/Caro/Game";
 
 const mapStateToProps = state => ({
-  Game: state.Game,
+  Game: state.gameReducer,
 });
 const mapDispatchToProps = dispatch => ({
   handleClick: i => {

@@ -1,7 +1,11 @@
-import { combineReducers } from "redux";
-import Game from './Game';
+import {combineReducers} from "redux";
+import gameReducer from "./Game";
+import registerReducer from "./register";
+import alertReducer from "./alert";
 
 const allReducers = combineReducers({
-    Game
+  gameReducer,
+  registerReducer,
+  alertReducer,
 });
 export default allReducers;
