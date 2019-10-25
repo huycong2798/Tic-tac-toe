@@ -39,24 +39,24 @@ const login = (email, password) => {
 
   return fetch(`https://server-api-caro.herokuapp.com/user/login`, requestOptions)
     .then(handleResponse)
-    .then(user => {
-      console.log(JSON.stringify(user));
+    .then(res => {
+      console.log(JSON.stringify(res));
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", JSON.stringify(res.token));
 
-      return user;
+      return res;
     });
 };
 const authHeader = () => {
   // return authorization header with jwt token
-  const user = JSON.parse(localStorage.getItem("user"));
+  const token = JSON.parse(localStorage.getItem("token"));
 
-  if (user && user.token) {
-    return {Authorization: `Bearer ${user.token}`};
+  if (token) {
+    return {Authorization: `Bearer ${token}`};
   }
   return {};
 };
-function getAll() {
+const getMe = () => {
   const requestOptions = {
     method: "GET",
     headers: authHeader(),
@@ -65,10 +65,16 @@ function getAll() {
   return fetch(`https://server-api-caro.herokuapp.com/me`, requestOptions).then(
     handleResponse
   );
-}
+};
+const logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+};
+
 const userService = {
   register,
   login,
-  getAll,
+  getMe,
+  logout,
 };
 export default userService;

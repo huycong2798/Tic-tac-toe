@@ -7,6 +7,10 @@ import {Form, Icon, Input, Button, Checkbox} from "antd";
 import loading from "../../gif/loading.gif";
 
 class NormalLoginForm extends React.PureComponent {
+  componentDidMount() {
+    const prop = this.props;
+    prop.logout();
+  }
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -18,8 +22,7 @@ class NormalLoginForm extends React.PureComponent {
   };
 
   render() {
-    console.log(this.props);
-    const {loggingIn} = this.props.LoginComponent;
+    const {isLogging} = this.props.LoginComponent;
     const {getFieldDecorator} = this.props.form;
     return (
       <div>
@@ -43,10 +46,10 @@ class NormalLoginForm extends React.PureComponent {
             <a className="login-form-forgot" href="">
               Forgot password
             </a>
-            {loggingIn && <img src={loading} />}
+            {isLogging && <img src={loading} />}
             <Button
               type="primary"
-              disabled={loggingIn}
+              disabled={isLogging}
               htmlType="submit"
               className="login-form-button"
             >

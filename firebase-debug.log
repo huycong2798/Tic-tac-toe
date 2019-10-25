@@ -1,0 +1,23 @@
+[debug] [2019-10-23T14:35:14.594Z] ----------------------------------------------------------------------
+[debug] [2019-10-23T14:35:14.596Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Queo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js open
+[debug] [2019-10-23T14:35:14.597Z] CLI Version:   7.4.0
+[debug] [2019-10-23T14:35:14.597Z] Platform:      win32
+[debug] [2019-10-23T14:35:14.597Z] Node Version:  v10.15.3
+[debug] [2019-10-23T14:35:14.598Z] Time:          Wed Oct 23 2019 21:35:14 GMT+0700 (Indochina Time)
+[debug] [2019-10-23T14:35:14.598Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-23T14:35:14.608Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-23T14:35:14.609Z] > authorizing via signed-in user
+[debug] [2019-10-23T14:35:14.609Z] [iam] checking project caro-react-redux for permissions ["firebase.projects.get"]
+[debug] [2019-10-23T14:35:14.611Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/caro-react-redux:testIamPermissions  
+
+[debug] [2019-10-23T14:35:15.958Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-23T14:35:15.967Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/caro-react-redux  
+ 
+[debug] [2019-10-23T14:35:16.458Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-23T14:38:18.119Z] Error: kill ENOSYS
+    at process.kill (internal/process/per_thread.js:198:13)
+    at process.listener (C:\Users\Queo\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\signal-exit\index.js:95:15)
+    at process.emit (events.js:189:13)
+[error] 
+[error] Error: An unexpected error has occurred.

@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Game from "./containers/Caro/Game";
 import RegisterComponent from "./containers/Register/register";
 import LoginComponent from "./containers/Login/Login";
-import NavBarComponent from "./component/navBar/navBar";
+import NavBarComponent from "./containers/navBar/navBar";
 import AlertComponent from "./containers/Alert/alert";
 import "./containers/navBar/navBar.css";
 import history from "./helper/history";

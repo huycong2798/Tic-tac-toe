@@ -20,9 +20,13 @@ const register = user => {
       () => {
         dispatch(success());
         history.push("/login");
-        // eslint-disable-next-line no-restricted-globals
-        location.reload(true);
+
         dispatch(alertActions.success("Registration successful"));
+
+        setTimeout(() => {
+          // eslint-disable-next-line no-restricted-globals
+          location.reload(true);
+        }, 2000);
       },
       error => {
         console.log(error);
@@ -48,6 +52,7 @@ const login = (email, password) => {
     userService.login(email, password).then(
       user => {
         dispatch(success(user));
+
         history.push("/");
         // eslint-disable-next-line no-restricted-globals
         location.reload(true);
@@ -59,8 +64,36 @@ const login = (email, password) => {
     );
   };
 };
+const getMe = () => {
+  const request = () => {
+    return {type: userConstants.GETME_REQUEST};
+  };
+  const success = user => {
+    return {type: userConstants.GETME_SUCCESS, user};
+  };
+  const failure = error => {
+    return {type: userConstants.GETME_FAILURE, error};
+  };
+  return dispatch => {
+    dispatch(request());
+
+    userService.getMe().then(
+      user => {
+        dispatch(success(user));
+        localStorage.setItem("user", JSON.stringify(user));
+      },
+      error => dispatch(failure(error.toString()))
+    );
+  };
+};
+const logout = () => {
+  userService.logout();
+  return {type: userConstants.LOGOUT};
+};
 const userActions = {
   register,
   login,
+  getMe,
+  logout,
 };
 export default userActions;
