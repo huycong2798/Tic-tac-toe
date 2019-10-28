@@ -2,11 +2,6 @@ import React from "react";
 import Board from "./Board";
 
 class Game extends React.PureComponent {
-  componentDidMount() {
-    const prop = this.props;
-    prop.getMe();
-  }
-
   render() {
     const prop = this.props;
     const game = prop.Game;

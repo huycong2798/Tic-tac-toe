@@ -1,5 +1,6 @@
 /* eslint-disable  */
 import React from "react";
+import {Link} from "react-router-dom";
 import "antd/dist/antd.css";
 import "../../containers/Register/Register.css";
 import {Form, Input, Tooltip, Icon, Select, Checkbox, Button} from "antd";
@@ -146,6 +147,9 @@ class RegistrationForm extends React.Component {
             >
               Register
             </Button>
+            <Link className="Link" to="/login">
+              Cancel
+            </Link>
           </Form.Item>
         </Form>
       </div>

@@ -14,10 +14,10 @@ class App extends React.PureComponent {
     return (
       <Router history={history}>
         <div>
-          <NavBarComponent />
           <AlertComponent />
           <Switch>
-            <Route exact path="/" component={Game}>
+            <Route exact path="/">
+              <NavBarComponent />
               <Game />
             </Route>
             <Route path="/register" component={RegisterComponent} />

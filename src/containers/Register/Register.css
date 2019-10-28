@@ -12,3 +12,6 @@ img {
   margin: auto;
   display: flex;
 }
+.Link {
+  font-size: larger;
+}
