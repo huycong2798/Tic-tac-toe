@@ -3,14 +3,10 @@ import {Link} from "react-router-dom";
 import "antd/dist/antd.css";
 import {Menu, Dropdown, Icon} from "antd";
 
-const menu = profileUser => (
+const menu = (
   <Menu>
     <Menu.Item>
-      <h4>Hi,{profileUser.email}</h4>
-    </Menu.Item>
-    <Menu.Divider />
-    <Menu.Item>
-      <Link to="/">Profie</Link>
+      <Link to="/">Profile</Link>
     </Menu.Item>
     <Menu.Item>
       <Link to="/login">Logout</Link>
@@ -42,9 +38,9 @@ class navBarComponent extends React.PureComponent {
             </li>
             {isLogged && (
               <li>
-                <Dropdown overlay={menu(profileUser)}>
-                  <a className="ant-dropdown-link" href="/">
-                    Login <Icon type="down" />
+                <Dropdown overlay={menu}>
+                  <a className="ant-dropdown-link" href="##">
+                    Hi, {profileUser.email} <Icon type="down" />
                   </a>
                 </Dropdown>
               </li>

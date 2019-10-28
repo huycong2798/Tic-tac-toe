@@ -1,7 +1,6 @@
 import React from "react";
 
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-
+import {Router, Switch, Route} from "react-router-dom";
 import Game from "./containers/Caro/Game";
 import RegisterComponent from "./containers/Register/register";
 import LoginComponent from "./containers/Login/Login";

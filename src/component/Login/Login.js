@@ -1,6 +1,7 @@
 /* eslint-disable  */
 
 import React from "react";
+import {Link} from "react-router-dom";
 import "antd/dist/antd.css";
 import "../../containers/Login/Login.css";
 import {Form, Icon, Input, Button, Checkbox} from "antd";
@@ -55,7 +56,8 @@ class NormalLoginForm extends React.PureComponent {
             >
               Log in
             </Button>
-            Or <a href="/register">register now!</a>
+            Or
+            <Link to="/register"> Register now!</Link>
           </Form.Item>
         </Form>
       </div>

@@ -22,42 +22,9 @@ const register = user => {
         history.push("/login");
 
         dispatch(alertActions.success("Registration successful"));
-
-        setTimeout(() => {
-          // eslint-disable-next-line no-restricted-globals
-          location.reload(true);
-        }, 2000);
       },
       error => {
         console.log(error);
-        dispatch(failure(error.toString()));
-        dispatch(alertActions.error(error.toString()));
-      }
-    );
-  };
-};
-const login = (email, password) => {
-  const request = user => {
-    return {type: userConstants.LOGIN_REQUEST, user};
-  };
-  const success = user => {
-    return {type: userConstants.LOGIN_SUCCESS, user};
-  };
-  const failure = error => {
-    return {type: userConstants.LOGIN_FAILURE, error};
-  };
-  return dispatch => {
-    dispatch(request({email}));
-
-    userService.login(email, password).then(
-      user => {
-        dispatch(success(user));
-
-        history.push("/");
-        // eslint-disable-next-line no-restricted-globals
-        location.reload(true);
-      },
-      error => {
         dispatch(failure(error.toString()));
         dispatch(alertActions.error(error.toString()));
       }
@@ -86,6 +53,34 @@ const getMe = () => {
     );
   };
 };
+const login = (email, password) => {
+  const request = user => {
+    return {type: userConstants.LOGIN_REQUEST, user};
+  };
+  const success = user => {
+    return {type: userConstants.LOGIN_SUCCESS, user};
+  };
+  const failure = error => {
+    return {type: userConstants.LOGIN_FAILURE, error};
+  };
+  return dispatch => {
+    dispatch(request({email}));
+
+    userService.login(email, password).then(
+      user => {
+        getMe();
+        dispatch(success(user));
+
+        history.push("/");
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+};
+
 const logout = () => {
   userService.logout();
   return {type: userConstants.LOGOUT};

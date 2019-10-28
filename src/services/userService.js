@@ -1,6 +1,15 @@
 /* eslint-disable no-restricted-globals */
 
 // const url = "https://server-api-caro.herokuapp.com/user/register";
+const authHeader = () => {
+  // return authorization header with jwt token
+  const token = JSON.parse(localStorage.getItem("token"));
+
+  if (token) {
+    return {Authorization: `Bearer ${token}`};
+  }
+  return {};
+};
 function handleResponse(response) {
   return response.text().then(text => {
     const data = text && JSON.parse(text);
@@ -30,6 +39,16 @@ const register = async user => {
     requestOptions
   ).then(handleResponse);
 };
+const getMe = () => {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
+
+  return fetch(`https://server-api-caro.herokuapp.com/me`, requestOptions).then(
+    handleResponse
+  );
+};
 const login = (email, password) => {
   const requestOptions = {
     method: "POST",
@@ -43,29 +62,10 @@ const login = (email, password) => {
       console.log(JSON.stringify(res));
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem("token", JSON.stringify(res.token));
-
       return res;
     });
 };
-const authHeader = () => {
-  // return authorization header with jwt token
-  const token = JSON.parse(localStorage.getItem("token"));
 
-  if (token) {
-    return {Authorization: `Bearer ${token}`};
-  }
-  return {};
-};
-const getMe = () => {
-  const requestOptions = {
-    method: "GET",
-    headers: authHeader(),
-  };
-
-  return fetch(`https://server-api-caro.herokuapp.com/me`, requestOptions).then(
-    handleResponse
-  );
-};
 const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
