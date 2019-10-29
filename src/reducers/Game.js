@@ -43,7 +43,7 @@ function calculateWinner(squares) {
 const initialState = {
   history: [
     {
-      squares: Array(nRow).fill(null),
+      squares: Array(nRow * nRow).fill(null),
       position: null,
     },
   ],

@@ -1,7 +1,25 @@
 import React from "react";
 import Board from "./Board";
+import aiMove from "./aiHandle";
 
 class Game extends React.PureComponent {
+  // eslint-disable-next-line camelcase
+  // eslint-disable-next-line react/no-deprecated
+  componentWillReceiveProps(nextProps) {
+    const game = nextProps.Game;
+    const {history, xIsNext} = game;
+    const {stepNumber} = game;
+    const current = history[stepNumber];
+    const {squares, position} = current;
+    if (!xIsNext) {
+      console.log("current----", position.x);
+      const move = aiMove(squares, position);
+      setTimeout(() => {
+        nextProps.handleClick(move);
+      }, 500);
+    }
+  }
+
   render() {
     const prop = this.props;
     const game = prop.Game;
