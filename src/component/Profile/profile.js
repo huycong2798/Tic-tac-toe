@@ -13,7 +13,6 @@ class profileForm extends React.Component {
     confirmDirty: false,
     autoCompleteResult: [],
   };
-
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {

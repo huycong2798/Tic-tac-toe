@@ -21,8 +21,6 @@ class navBarComponent extends React.PureComponent {
 
   render() {
     const prop = this.props;
-
-    console.log("prop of Navbar", prop);
     const {info, isLogged} = prop.navBarComponent;
     const profileUser = isLogged ? info.user : null;
     return (

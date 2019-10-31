@@ -20,7 +20,6 @@ function handleResponse(response) {
         // logout();
         location.reload(true);
       }
-      console.log("data----not ok", data);
       return Promise.reject(data.returnmessage);
     }
 

@@ -98,10 +98,9 @@ const edit = info => {
   return dispatch => {
     dispatch(request(info));
     userService.edit(info).then(
-      newUser => {
+      () => {
         dispatch(success());
-        history.push("/profile");
-        console.log("updated user", newUser);
+        dispatch(getMe());
         dispatch(alertActions.success("Edited successfully"));
       },
       error => {
