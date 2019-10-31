@@ -68,7 +68,6 @@ const login = (email, password) => {
 
     userService.login(email, password).then(
       user => {
-        getMe();
         dispatch(success(user));
 
         history.push("/");
@@ -85,10 +84,38 @@ const logout = () => {
   userService.logout();
   return {type: userConstants.LOGOUT};
 };
+
+const edit = info => {
+  const request = () => {
+    return {type: userConstants.EDIT_REQUEST, info};
+  };
+  const success = () => {
+    return {type: userConstants.EDIT_SUCCESS, info};
+  };
+  const failure = error => {
+    return {type: userConstants.EDIT_FAILURE, error};
+  };
+  return dispatch => {
+    dispatch(request(info));
+    userService.edit(info).then(
+      newUser => {
+        dispatch(success());
+        history.push("/profile");
+        console.log("updated user", newUser);
+        dispatch(alertActions.success("Edited successfully"));
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+};
 const userActions = {
   register,
   login,
   getMe,
   logout,
+  edit,
 };
 export default userActions;

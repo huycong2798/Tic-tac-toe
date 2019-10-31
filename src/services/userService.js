@@ -27,13 +27,12 @@ function handleResponse(response) {
     return data;
   });
 }
-const register = async user => {
+const register = user => {
   const requestOptions = {
     method: "POST",
-    headers: {Accept: "application/json", "Content-Type": "application/json"},
+    headers: {"Content-Type": "application/json"},
     body: JSON.stringify(user),
   };
-  console.log(requestOptions.body);
   return fetch(
     `https://server-api-caro.herokuapp.com/user/register`,
     requestOptions
@@ -70,11 +69,22 @@ const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
 };
+const edit = info => {
+  const requestOptions = {
+    method: "PUT",
+    headers: {...authHeader(), "Content-Type": "application/json"},
+    body: JSON.stringify(info),
+  };
 
+  return fetch(`https://server-api-caro.herokuapp.com/user/edit`, requestOptions).then(
+    handleResponse
+  );
+};
 const userService = {
   register,
   login,
   getMe,
   logout,
+  edit,
 };
 export default userService;

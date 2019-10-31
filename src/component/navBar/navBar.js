@@ -6,7 +6,7 @@ import {Menu, Dropdown, Icon} from "antd";
 const menu = (
   <Menu>
     <Menu.Item>
-      <Link to="/">Profile</Link>
+      <Link to="/profile">Profile</Link>
     </Menu.Item>
     <Menu.Item>
       <Link to="/login">Logout</Link>
@@ -22,7 +22,7 @@ class navBarComponent extends React.PureComponent {
   render() {
     const prop = this.props;
 
-    console.log("props", prop);
+    console.log("prop of Navbar", prop);
     const {info, isLogged} = prop.navBarComponent;
     const profileUser = isLogged ? info.user : null;
     return (
@@ -41,7 +41,7 @@ class navBarComponent extends React.PureComponent {
               <li>
                 <Dropdown overlay={menu}>
                   <a className="ant-dropdown-link" href="##">
-                    Hi, {profileUser.email} <Icon type="down" />
+                    Hi, {profileUser.name} <Icon type="down" />
                   </a>
                 </Dropdown>
               </li>

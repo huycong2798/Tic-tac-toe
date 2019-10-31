@@ -6,6 +6,7 @@ import RegisterComponent from "./containers/Register/register";
 import LoginComponent from "./containers/Login/Login";
 import NavBarComponent from "./containers/navBar/navBar";
 import AlertComponent from "./containers/Alert/alert";
+import ProfileComponent from "./containers/profile/profile";
 import "./containers/navBar/navBar.css";
 import history from "./helper/history";
 
@@ -14,14 +15,24 @@ class App extends React.PureComponent {
     return (
       <Router history={history}>
         <div>
-          <AlertComponent />
           <Switch>
             <Route exact path="/">
               <NavBarComponent />
               <Game />
             </Route>
-            <Route path="/register" component={RegisterComponent} />
-            <Route path="/login" component={LoginComponent} />
+            <Route path="/register">
+              <AlertComponent />
+              <RegisterComponent />
+            </Route>
+            <Route path="/login">
+              <AlertComponent />
+              <LoginComponent />
+            </Route>
+            <Route path="/profile">
+              <NavBarComponent />
+              <AlertComponent />
+              <ProfileComponent />
+            </Route>
           </Switch>
         </div>
       </Router>

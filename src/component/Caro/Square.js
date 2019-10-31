@@ -1,6 +1,6 @@
 import React from "react";
 
-function Square(props) {
+const Square = props => {
   let corlorValue = "square btn-hover";
   const property = props;
   if (property.isEnd) {
@@ -20,5 +20,5 @@ function Square(props) {
       {property.value}
     </button>
   );
-}
+};
 export default Square;
