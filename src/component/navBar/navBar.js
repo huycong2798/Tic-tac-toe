@@ -39,7 +39,9 @@ class navBarComponent extends React.PureComponent {
               <li>
                 <Dropdown overlay={menu}>
                   <a className="ant-dropdown-link" href="##">
-                    Hi, {profileUser.name} <Icon type="down" />
+                    Hi,
+                    <img src={profileUser.urlAvatar} alt="avatar" />
+                    {profileUser.name} <Icon type="down" />
                   </a>
                 </Dropdown>
               </li>

@@ -38,5 +38,5 @@
         "location": false,
         "history":false
     },
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
 }

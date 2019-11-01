@@ -74,7 +74,7 @@ const edit = info => {
     headers: {...authHeader(), "Content-Type": "application/json"},
     body: JSON.stringify(info),
   };
-
+  console.log("body----", requestOptions.body);
   return fetch(`https://server-api-caro.herokuapp.com/user/edit`, requestOptions).then(
     handleResponse
   );
