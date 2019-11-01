@@ -3,17 +3,11 @@ import React from "react";
 import {Link} from "react-router-dom";
 import "antd/dist/antd.css";
 import "../../containers/profile/profile.css";
-import {Form, Input, Select, Button, Upload} from "antd";
-import loading from "../../gif/loading.gif";
+import {Form, Input, Select, Button, Upload, message, Progress} from "antd";
+import loadingGif from "../../gif/loading.gif";
 import {storage} from "../../firebase";
 
 const {Option} = Select;
-
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
 
 function beforeUpload(file) {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
@@ -30,6 +24,7 @@ class profileForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      uploading: false,
       loading: false,
       progress: 0,
     };
@@ -43,11 +38,15 @@ class profileForm extends React.Component {
         values.urlAvatar = urlImage ? urlImage : values.urlAvatar;
         console.log("Received values of form: ", values);
         this.props.edit(values);
+        this.setState({loading: false});
       }
     });
   };
   handleChange = info => {
-    console.log("hereee", info.file);
+    if (info.file.status === "uploading") {
+      this.setState({uploading: true});
+      return;
+    }
     if (info.file.status === "done") {
       const image = info.file.originFileObj;
       console.log("yeahhhh", image.name);
@@ -60,7 +59,7 @@ class profileForm extends React.Component {
           const progress = Math.round(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
-          this.setState({progress});
+          this.setState({loading: true, uploading: false, progress});
         },
         error => {
           // error function ....
@@ -102,7 +101,7 @@ class profileForm extends React.Component {
           initialValue: profileUser.urlAvatar,
         })
       : null;
-    const {urlImage} = this.state;
+    const {urlImage, loading, uploading} = this.state;
     const style = {
       height: "100vh",
       display: "flex",
@@ -138,7 +137,8 @@ class profileForm extends React.Component {
                   />
                 )}
               </Upload>
-              <progress value={this.state.progress} max="100" />
+              {uploading && <img src={loadingGif} />}
+              {loading && <Progress percent={this.state.progress} />}
             </Form.Item>
             <Form.Item label="E-mail">
               <Input disabled value={profileUser.email} />
@@ -162,7 +162,7 @@ class profileForm extends React.Component {
               })(<Input addonBefore={prefixSelector} style={{width: "100%"}} />)}
             </Form.Item>
             <Form.Item>
-              {isUpdating && <img src={loading} />}
+              {isUpdating && <img src={loadingGif} />}
               <Button
                 type="primary"
                 disabled={isUpdating}
