@@ -13,18 +13,12 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [
-        {
-          name: "",
-          urlAvatar: "",
-          message: "Hi",
-        },
-      ],
+      messages: [],
     };
   }
 
   componentWillMount() {
-    console.log("socket", socket);
+    console.log("socket", socket.id);
     //socket.on('id', res => this.setState(console.log("id",res),{user: res}))
     socket.on("RECEIVE_MESSAGE", response => {
       console.log("response", response), this.receiveMessage(response);
@@ -53,9 +47,11 @@ export default class App extends React.Component {
 
   sendnewMessage(m) {
     console.log("send ", m);
+    const roomId = localStorage.getItem("roomId");
+    socket.emit("JOIN_ROOM", roomId);
     if (m.value) {
       socket.emit("SEND_MESSAGE", {
-        // roomID,
+        roomId,
         name: this.props.user.name,
         urlAvatar: this.props.user.urlAvatar,
         message: m.value,
@@ -70,7 +66,10 @@ export default class App extends React.Component {
       }
     }
   }
-
+  //   componentDidMount () {
+  //     const room = localStorage.getItem('roomId');
+  //     socket.emit('JOIN_ROOM', room);
+  //   }
   typing(data) {
     if (data) {
       const objMessage = $(".messages");

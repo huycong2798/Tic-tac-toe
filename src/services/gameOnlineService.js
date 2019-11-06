@@ -1,5 +1,5 @@
-const url = "http://localhost:8000/gameonline/findroom";
-// const url1 = "https://server-api-caro.herokuapp.com/gameonline/findroom";
+// const url = "8000/gameonline/findroom";
+const url = "https://server-api-caro.herokuapp.com/gameonline/findroom";
 function handleResponse(response) {
   return response.text().then(text => {
     const data = text && JSON.parse(text);
@@ -15,12 +15,12 @@ function handleResponse(response) {
     return data;
   });
 }
-const findRoom = () => {
+const findRoom = socketId => {
   const requestOptions = {
     method: "GET",
   };
-
-  return fetch(url, requestOptions).then(handleResponse);
+  const reqUrl = `${url}/?socketId=${socketId}`;
+  return fetch(reqUrl, requestOptions).then(handleResponse);
 };
 const gameOnlineService = {
   findRoom,

@@ -65,8 +65,7 @@ const login = (email, password) => {
 };
 
 const logout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
+  localStorage.clear();
 };
 const edit = info => {
   const requestOptions = {
