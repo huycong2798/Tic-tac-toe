@@ -94,7 +94,7 @@ class RegistrationForm extends React.Component {
             {getFieldDecorator("confirm", {
               rules: [
                 {
-                  // required: true,
+                  required: true,
                   message: "Please confirm your password!",
                 },
                 {
@@ -102,31 +102,6 @@ class RegistrationForm extends React.Component {
                 },
               ],
             })(<Input.Password onBlur={this.handleConfirmBlur} />)}
-          </Form.Item>
-          <Form.Item
-          // label={
-          //   <span>
-          //     Nickname&nbsp;
-          //     <Tooltip title="What do you want others to call you?">
-          //       <Icon type="question-circle-o" />
-          //     </Tooltip>
-          //   </span>
-          // }
-          >
-            {getFieldDecorator("nickname", {
-              rules: [
-                {
-                  //   required: true,
-                  message: "Please input your nickname!",
-                  whitespace: true,
-                },
-              ],
-            })(<Input />)}
-          </Form.Item>
-          <Form.Item label="Phone Number">
-            {getFieldDecorator("phone", {
-              rules: [{message: "Please input your phone number!"}],
-            })(<Input addonBefore={prefixSelector} style={{width: "100%"}} />)}
           </Form.Item>
           <Form.Item>
             {getFieldDecorator("agreement", {
