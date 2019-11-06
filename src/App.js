@@ -7,6 +7,8 @@ import LoginComponent from "./containers/Login/Login";
 import NavBarComponent from "./containers/navBar/navBar";
 import AlertComponent from "./containers/Alert/alert";
 import ProfileComponent from "./containers/profile/profile";
+import HomeComponent from "./component/home/home";
+import GameOnline from "./containers/Caro/online/game";
 import "./containers/navBar/navBar.css";
 import history from "./helper/history";
 
@@ -17,6 +19,14 @@ class App extends React.PureComponent {
         <div>
           <Switch>
             <Route exact path="/">
+              <NavBarComponent />
+              <HomeComponent />
+            </Route>
+            <Route path="/online">
+              <NavBarComponent />
+              <GameOnline />
+            </Route>
+            <Route path="/offline">
               <NavBarComponent />
               <Game />
             </Route>

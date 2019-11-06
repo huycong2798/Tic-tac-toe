@@ -3,10 +3,6 @@ import Board from "./Board";
 import aiMove from "./aiHandle";
 
 class Game extends React.PureComponent {
-  componentDidMount() {
-    console.log("queocuteeeee");
-  }
-
   // eslint-disable-next-line camelcase
   // eslint-disable-next-line react/no-deprecated
   componentWillReceiveProps(nextProps) {
