@@ -8,7 +8,7 @@ import Input from "./input";
 
 import "../../containers/chat/chat.css";
 
-const socket = io("http://localhost:8000/");
+const socket = io("https://server-api-caro.herokuapp.com/");
 export default class App extends React.Component {
   constructor(props) {
     super(props);
