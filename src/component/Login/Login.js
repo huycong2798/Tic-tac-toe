@@ -4,6 +4,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
+import SOCIAL_APP_ID from "../../constants/Server/socialLogin";
 import "antd/dist/antd.css";
 import "../../containers/Login/Login.css";
 import {Form, Icon, Input, Button, Checkbox} from "antd";
@@ -32,7 +33,7 @@ class NormalLoginForm extends React.PureComponent {
       const {email, name, picture} = response;
 
       const user = {};
-      user.password = "thisissecret";
+      user.password = SOCIAL_APP_ID.SOCIAL_PASSWORD;
       user.email = email;
       user.name = name;
       user.urlAvatar = picture.data.url;
@@ -44,7 +45,7 @@ class NormalLoginForm extends React.PureComponent {
         console.log("fb--", response);
         const {email, name, imageUrl} = response.profileObj;
         const user = {};
-        user.password = "thisissecret";
+        user.password = SOCIAL_APP_ID.SOCIAL_PASSWORD;
         user.email = email;
         user.name = name;
         user.urlAvatar = imageUrl;
@@ -87,7 +88,7 @@ class NormalLoginForm extends React.PureComponent {
             <div className="btnSocial">
               <GoogleLogin
                 className="ggBtnLogin"
-                clientId="8719741269-j1nbufatfvl1067ghl99cjd4qv5ug796.apps.googleusercontent.com"
+                clientId={SOCIAL_APP_ID.GOOGLE_CLIENTID}
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
               />
@@ -95,7 +96,7 @@ class NormalLoginForm extends React.PureComponent {
             <div>
               <FacebookLogin
                 cssClass="fBtnLogin"
-                appId="875658396161898"
+                appId={SOCIAL_APP_ID.FACEBOOK_APPID}
                 fields="name,email,picture"
                 icon="fa-facebook"
                 callback={responseFacebook}
