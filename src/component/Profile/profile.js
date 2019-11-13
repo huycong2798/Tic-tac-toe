@@ -86,7 +86,6 @@ class profileForm extends React.Component {
     const {isUpdating} = prop.profileReducer;
     const {info, isLogged} = prop.userReducer;
     const profileUser = isLogged ? info.user : null;
-    console.log("prop-----pròile", prop);
     const {getFieldDecorator} = this.props.form;
     const prefixSelector = getFieldDecorator("prefix", {
       initialValue: "84",

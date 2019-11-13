@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
+import API_SERVICE from "../constants/Server/api";
 
-// const url = "https://server-api-caro.herokuapp.com/user/register";
 const authHeader = () => {
   // return authorization header with jwt token
   const token = JSON.parse(localStorage.getItem("token"));
@@ -32,10 +32,7 @@ const register = user => {
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(user),
   };
-  return fetch(
-    `https://server-api-caro.herokuapp.com/user/register`,
-    requestOptions
-  ).then(handleResponse);
+  return fetch(API_SERVICE.REGISTER, requestOptions).then(handleResponse);
 };
 const getMe = () => {
   const requestOptions = {
@@ -43,9 +40,7 @@ const getMe = () => {
     headers: authHeader(),
   };
 
-  return fetch(`https://server-api-caro.herokuapp.com/me`, requestOptions).then(
-    handleResponse
-  );
+  return fetch(API_SERVICE.GET_ME, requestOptions).then(handleResponse);
 };
 const login = (email, password) => {
   const requestOptions = {
@@ -54,7 +49,7 @@ const login = (email, password) => {
     body: JSON.stringify({email, password}),
   };
 
-  return fetch(`https://server-api-caro.herokuapp.com/user/login`, requestOptions)
+  return fetch(API_SERVICE.LOGIN, requestOptions)
     .then(handleResponse)
     .then(res => {
       console.log(JSON.stringify(res));
@@ -74,9 +69,7 @@ const edit = info => {
     body: JSON.stringify(info),
   };
   console.log("body----", requestOptions.body);
-  return fetch(`https://server-api-caro.herokuapp.com/user/edit`, requestOptions).then(
-    handleResponse
-  );
+  return fetch(API_SERVICE.EDIT, requestOptions).then(handleResponse);
 };
 const userService = {
   register,

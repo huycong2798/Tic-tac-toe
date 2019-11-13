@@ -2,6 +2,8 @@
 
 import React from "react";
 import {Link} from "react-router-dom";
+import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
 import "antd/dist/antd.css";
 import "../../containers/Login/Login.css";
 import {Form, Icon, Input, Button, Checkbox} from "antd";
@@ -25,6 +27,32 @@ class NormalLoginForm extends React.PureComponent {
   render() {
     const {isLogging} = this.props.LoginComponent;
     const {getFieldDecorator} = this.props.form;
+    const responseFacebook = response => {
+      console.log("fb--", response);
+      const {email, name, picture} = response;
+
+      const user = {};
+      user.password = "thisissecret";
+      user.email = email;
+      user.name = name;
+      user.urlAvatar = picture.data.url;
+      this.props.register(user, true);
+    };
+
+    const responseGoogle = response => {
+      try {
+        console.log("fb--", response);
+        const {email, name, imageUrl} = response.profileObj;
+        const user = {};
+        user.password = "thisissecret";
+        user.email = email;
+        user.name = name;
+        user.urlAvatar = imageUrl;
+        this.props.register(user, true);
+      } catch (e) {
+        console.log(e);
+      }
+    };
     return (
       <div>
         <h1>Login</h1>
@@ -56,6 +84,23 @@ class NormalLoginForm extends React.PureComponent {
             >
               Log in
             </Button>
+            <div className="btnSocial">
+              <GoogleLogin
+                className="ggBtnLogin"
+                clientId="8719741269-j1nbufatfvl1067ghl99cjd4qv5ug796.apps.googleusercontent.com"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+              />
+            </div>
+            <div>
+              <FacebookLogin
+                cssClass="fBtnLogin"
+                appId="875658396161898"
+                fields="name,email,picture"
+                icon="fa-facebook"
+                callback={responseFacebook}
+              />
+            </div>
             Or
             <Link to="/register"> Register now!</Link>
           </Form.Item>

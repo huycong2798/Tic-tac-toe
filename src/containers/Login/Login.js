@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   login: userActions.login,
   logout: userActions.logout,
+  register: userActions.register,
 };
 export default connect(
   mapStateToProps,
